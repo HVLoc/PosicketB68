@@ -19,7 +19,7 @@
 Sunmi V2 Pro
 
 ## import packages
-import 'package:easy_ticket_b08/features/printer_pos/service_printer_pos/sunmi_printer.dart';
+import 'package:posTicketB68/features/printer_pos/service_printer_pos/sunmi_printer.dart';
 // all method from sunmi printer need to async await
 
 await SunmiPrinter.bindPrinterService(); // Initialize the printer

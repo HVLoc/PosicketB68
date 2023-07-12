@@ -1,4 +1,4 @@
-package com.example.easy_ticket_b08.utils;
+package vn.lochv.b68.utils;
 
 import android.graphics.Bitmap;
 
@@ -20,6 +20,7 @@ public class BitmapUtil {
 
     /**
      * 生成条码bitmap
+     * 
      * @param content
      * @param format
      * @param width
@@ -27,10 +28,10 @@ public class BitmapUtil {
      * @return
      */
     public static Bitmap generateBitmap(String content, int format, int width, int height) {
-        if(content == null || content.equals(""))
+        if (content == null || content.equals(""))
             return null;
         BarcodeFormat barcodeFormat;
-        switch (format){
+        switch (format) {
             case 0:
                 barcodeFormat = BarcodeFormat.UPC_A;
                 break;
@@ -85,7 +86,7 @@ public class BitmapUtil {
             return Bitmap.createBitmap(pixels, 0, width, width, height, Bitmap.Config.RGB_565);
         } catch (WriterException e) {
             e.printStackTrace();
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
         return null;

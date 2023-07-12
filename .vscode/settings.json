@@ -1,3 +1,4 @@
 {
-    "dart.flutterSdkPath": "D:\\sds\\easypos\\.fvm\\flutter_sdk"
+    "dart.flutterSdkPath": "D:\\sds\\easypos\\.fvm\\flutter_sdk",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

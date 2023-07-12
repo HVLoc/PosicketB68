@@ -1,9 +1,9 @@
-name: sunmi_printer_helper_example
-description: Demonstrates how to use the sunmi_printer_helper plugin.
+name: pos_ticket_b68_example
+description: Demonstrates how to use the pos_ticket_b68 plugin.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
@@ -17,7 +17,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  sunmi_print_ticket:
+  pos_ticket_b68:
     path: ../
 
   cupertino_icons: ^1.0.2
@@ -26,10 +26,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
 flutter:
-
   uses-material-design: true
   assets:
     - assets/images/
-

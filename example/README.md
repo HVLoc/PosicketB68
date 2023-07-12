@@ -1,6 +1,6 @@
-# sunmi_printer_helper_example
+# pos_ticket_b68_example
 
-Demonstrates how to use the sunmi_printer_helper plugin.
+Demonstrates how to use the pos_ticket_b68 plugin.
 
 ## Getting Started
 

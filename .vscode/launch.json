@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "easyticket_b08",
+            "name": "posTicket_68",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "easyticket_b08 (profile mode)",
+            "name": "posTicket_68 (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "easyticket_b08 (release mode)",
+            "name": "posTicket_68 (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
