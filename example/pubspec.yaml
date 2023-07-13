@@ -17,7 +17,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  sunmi_print_ticket:
+  pos_ticket_b68:
     path: ../
 
   cupertino_icons: ^1.0.2

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:sunmi_print_ticket/pos_ticket_b68.dart';
+import 'package:pos_ticket_b68/pos_ticket_b68.dart';
 
 Future<void> main() async {
   runApp(
@@ -11,7 +11,6 @@ Future<void> main() async {
         home: HomePrinterView()),
   );
   await PosTicket.bindPrinterService();
-  
 }
 
 class HomePrinterView extends StatelessWidget {
