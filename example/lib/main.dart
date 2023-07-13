@@ -1,15 +1,20 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sunmi_print_ticket/pos_ticket_b68.dart';
+import 'package:sunmi_print_ticket/sunmi_print_ticket.dart';
 import 'package:intl/intl.dart';
-import 'package:pos_ticket_b68/pos_ticket_b68.dart';
 
-void main() {
+Future<void> main() async {
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Application",
         home: HomePrinterView()),
   );
+  await PosTicket.bindPrinterService();
+  // await SunmiPrinter.bindPrinterService();
 }
 
 class HomePrinterView extends StatelessWidget {
@@ -25,50 +30,54 @@ class HomePrinterView extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await PosTicket.bindPrinterService();
-                  await PosTicket.initPrinter();
-
-                  await PosTicket.printText(
+                  await SunmiPrinter.bindPrinterService();
+                  await SunmiPrinter.initPrinter();
+                  await SunmiPrinter.startTransactionPrint(true);
+                  await SunmiPrinter.printText(
                       text: AppConst.nameCompany, bold: true, size: 20);
-                  await PosTicket.printText(
+                  await SunmiPrinter.printText(
                       text: AppConst.addressConpany,
                       bold: false,
                       size: 18,
                       underLine: false);
-                  await PosTicket.printText(
+                  await SunmiPrinter.printText(
                       text:
                           "${AppConst.taxCodeName} ${AppConst.taxCodeCustomer}",
                       bold: false,
                       size: 20);
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printText(
+                  await SunmiPrinter.setAlignment(1);
+                  await SunmiPrinter.printText(
                       text: AppConst.nameTicket, bold: false, size: 27);
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printText(
+                  await SunmiPrinter.setAlignment(1);
+                  await SunmiPrinter.printText(
                       text:
                           "${AppConst.fareTicket} ${AppConst.moneyTicket} đồng",
                       bold: false,
                       size: 25);
-                  await PosTicket.setAlignment(1);
+                  await SunmiPrinter.setAlignment(1);
                   //giờ vào
-                  await PosTicket.printText(
+                  await SunmiPrinter.printText(
                       text:
                           "${AppConst.ticketStartingDateHP} ${DateTime.now().hour} h ${DateTime.now().minute} p",
                       bold: false,
                       size: 20);
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printText(
+                  await SunmiPrinter.setAlignment(1);
+                  await SunmiPrinter.printText(
                       text:
                           "${AppConst.day} ${DateTime.now().day} ${AppConst.month} ${DateTime.now().month} ${AppConst.year} ${DateTime.now().year}",
                       bold: false,
                       size: 19);
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printText(
+                  await SunmiPrinter.setAlignment(1);
+                  await SunmiPrinter.printText(
                       text:
                           "${AppConst.ncc} ${AppConst.nameCompanyNCC} - ${AppConst.nameTaxCode} ${AppConst.taxCode} \n \t ${AppConst.custommerService} ${AppConst.phoneCustomerService}",
                       bold: true,
                       size: 17);
-                  await PosTicket.printLine(3);
+                  await SunmiPrinter.printLine(3);
+                  //await SunmiPrinter.cutPaper();
+                  await SunmiPrinter.submitTransactionPrint();
+                  await SunmiPrinter.exitTransactionPrint(true);
+                  await SunmiPrinter.unbindPrinterService();
                 },
                 child: const Text("In vé"),
               ),
@@ -77,26 +86,32 @@ class HomePrinterView extends StatelessWidget {
               child: ElevatedButton(
                 // in table
                 onPressed: () async {
-                  await PosTicket.bindPrinterService();
-                  await PosTicket.initPrinter();
-                  await PosTicket.printTable(size: 21, cols: [
+                  await SunmiPrinter.bindPrinterService();
+                  await SunmiPrinter.initPrinter();
+                  await SunmiPrinter.startTransactionPrint(true);
+                  await SunmiPrinter.printTable(size: 21, cols: [
                     ColumnMaker(text: 'Name', width: 10, align: 0),
                     ColumnMaker(text: 'Qty', width: 6, align: 1),
                     ColumnMaker(text: 'UN', width: 10, align: 2),
                     ColumnMaker(text: 'TOT', width: 10, align: 2),
                   ]);
-                  await PosTicket.printTable(cols: [
+                  await SunmiPrinter.printTable(cols: [
                     ColumnMaker(text: 'Fries', width: 10, align: 0),
                     ColumnMaker(text: '4x', width: 6, align: 1),
                     ColumnMaker(text: '3.00', width: 10, align: 2),
                     ColumnMaker(text: '12.00', width: 10, align: 2),
                   ]);
-                  await PosTicket.printTable(cols: [
+                  await SunmiPrinter.printTable(cols: [
                     ColumnMaker(text: 'Sản phẩm A', width: 10, align: 0),
                     ColumnMaker(text: '4x', width: 6, align: 1),
                     ColumnMaker(text: '30.00000', width: 10, align: 2),
                     ColumnMaker(text: '120.00000', width: 10, align: 2),
                   ]);
+                  //await SunmiPrinter.initPrinterExam();
+                  await SunmiPrinter.printLine(3);
+                  await SunmiPrinter.submitTransactionPrint();
+                  await SunmiPrinter.exitTransactionPrint(true);
+                  await SunmiPrinter.unbindPrinterService();
                 },
                 child: const Text("In bảng hoá đơn"),
               ),
@@ -104,54 +119,57 @@ class HomePrinterView extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await PosTicket.bindPrinterService();
-                  await PosTicket.initPrinter();
-
-                  await PosTicket.printText(
+                  await SunmiPrinter.bindPrinterService();
+                  await SunmiPrinter.initPrinter();
+                  await SunmiPrinter.startTransactionPrint(true);
+                  await SunmiPrinter.printText(
                       text: AppConst.nameCompany2, bold: true, size: 20);
-                  await PosTicket.printText(
+                  await SunmiPrinter.printText(
                       text: AppConst.addressConpany2,
                       bold: false,
                       size: 18,
                       underLine: false);
-                  await PosTicket.printText(
+                  await SunmiPrinter.printText(
                       text:
                           "${AppConst.taxCodeName} ${AppConst.taxCodeCustomer}",
                       bold: false,
                       size: 21);
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printText(
+                  await SunmiPrinter.setAlignment(1);
+                  await SunmiPrinter.printText(
                       text: AppConst.nameTicket2, bold: false, size: 30);
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printText(
+                  await SunmiPrinter.setAlignment(1);
+                  await SunmiPrinter.printText(
                       text: AppConst.location, bold: false, size: 27);
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printText(
+                  await SunmiPrinter.setAlignment(1);
+                  await SunmiPrinter.printText(
                       text:
                           "${AppConst.fareTicket} ${AppConst.moneyTicket2} đồng",
                       bold: false,
                       size: 25);
 
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printText(
+                  await SunmiPrinter.setAlignment(1);
+                  await SunmiPrinter.printText(
                       text:
                           "${AppConst.ticketStartingDate} ${DateTime.now().hour} h ${DateTime.now().minute} p ",
                       bold: false,
                       size: 20);
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printText(
+                  await SunmiPrinter.setAlignment(1);
+                  await SunmiPrinter.printText(
                       text:
                           "${AppConst.day} ${DateTime.now().day} ${AppConst.month} ${DateTime.now().month} ${AppConst.year} ${DateTime.now().year}",
                       bold: false,
                       size: 19);
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printText(
+                  await SunmiPrinter.setAlignment(1);
+                  await SunmiPrinter.printText(
                       text:
                           "${AppConst.ncc} ${AppConst.nameCompanyNCC} - ${AppConst.nameTaxCode} ${AppConst.taxCode} \n \t ${AppConst.custommerService} ${AppConst.phoneCustomerService}",
                       bold: true,
                       size: 17);
 
-                  await PosTicket.printLine(3);
+                  await SunmiPrinter.printLine(3);
+                  await SunmiPrinter.submitTransactionPrint();
+                  await SunmiPrinter.exitTransactionPrint(true);
+                  await SunmiPrinter.unbindPrinterService();
                 },
                 child: const Text("Bắc Ninh - Thanh Hoá"),
               ),
@@ -159,15 +177,18 @@ class HomePrinterView extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await PosTicket.bindPrinterService();
-                  await PosTicket.initPrinter();
-
-                  await PosTicket.printBarCode(
+                  await SunmiPrinter.bindPrinterService();
+                  await SunmiPrinter.initPrinter();
+                  await SunmiPrinter.startTransactionPrint(true);
+                  await SunmiPrinter.printBarCode(
                       dataBarCode: "0123648445",
                       symbology: 1,
                       height: 162,
                       width: 2,
                       textposition: 1);
+                  await SunmiPrinter.submitTransactionPrint();
+                  await SunmiPrinter.exitTransactionPrint(true);
+                  await SunmiPrinter.unbindPrinterService();
                 },
                 child: const Text("Bar code"),
               ),
@@ -175,15 +196,18 @@ class HomePrinterView extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await PosTicket.bindPrinterService();
-                  await PosTicket.initPrinter();
-
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printQr(
+                  await SunmiPrinter.bindPrinterService();
+                  await SunmiPrinter.initPrinter();
+                  await SunmiPrinter.startTransactionPrint(true);
+                  await SunmiPrinter.setAlignment(1);
+                  await SunmiPrinter.printQr(
                       dataQRCode: "https://github.com/hueht21",
                       modulesize: 5,
                       errorlevel: 2);
-                  await PosTicket.printLine(3);
+                  await SunmiPrinter.printLine(3);
+                  await SunmiPrinter.submitTransactionPrint();
+                  await SunmiPrinter.exitTransactionPrint(true);
+                  await SunmiPrinter.unbindPrinterService();
                 },
                 child: const Text("qr code"),
               ),
@@ -191,14 +215,15 @@ class HomePrinterView extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await PosTicket.initPrinter();
+                  await SunmiPrinter.initPrinter();
 
                   Uint8List byte =
                       await _getImageFromAsset('assets/images/dash.jpg');
-                  await PosTicket.setAlignment(1);
-
-                  await PosTicket.printImage(byte);
-                  await PosTicket.printLine(2);
+                  await SunmiPrinter.setAlignment(1);
+                  await SunmiPrinter.startTransactionPrint(true);
+                  await SunmiPrinter.printImage(byte);
+                  await SunmiPrinter.printLine(2);
+                  await SunmiPrinter.exitTransactionPrint(true);
                 },
                 child: Text("In ảnh"),
               ),

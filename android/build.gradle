@@ -1,4 +1,4 @@
-group 'vn.lochv.b68'
+group 'com.example.easy_ticket_b08'
 version '1.0'
 
 buildscript {
@@ -45,8 +45,9 @@ android {
 
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation files('libs/core-3.3.0.jar')
+    implementation files('libs/SmartPos_1.7.0_R230208.jar')
     implementation 'androidx.core:core:1.9.0'
-    // implementation 'com.sunmi:printerlibrary:1.0.18'
+    implementation 'com.sunmi:printerlibrary:1.0.18'
 //    implementation files("D:\\devtools\\flutter\\bin\\cache\\artifacts\\engine\\android-x64\\flutter.jar")
 }

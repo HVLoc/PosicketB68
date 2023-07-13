@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="vn.softdreams.example">
    <application
-        android:label="pos_printer_b68"
+        android:label="sunmi_printer"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

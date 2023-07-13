@@ -1,4 +1,4 @@
-package vn.lochv.b68.utils;
+package com.example.easy_ticket_b08.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -44,9 +44,10 @@ public class PosB68Helper {
     public PosB68Helper(Context context) {
         this._context = context;
 
-
     }
-
+    //        mDriverManager = DriverManager.getInstance();
+//        mPrinter = mDriverManager.getPrinter();
+//        mSys = mDriverManager.getBaseSysDevice();
 
     private static final String TAG = "PrintB68";
 
@@ -58,7 +59,8 @@ public class PosB68Helper {
     /**
      * init print service
      */
-    public void initSdk() {                   mDriverManager = DriverManager.getInstance();
+    public void initSdk() {
+        mDriverManager = DriverManager.getInstance();
         mPrinter = mDriverManager.getPrinter();
         mSys = mDriverManager.getBaseSysDevice();
         int status = mSys.sdkInit();
