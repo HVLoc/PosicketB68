@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:pos_ticket_b68/pos_ticket_b68.dart';
+import 'package:pos_ticket_b68/src.dart';
 
 Future<void> main() async {
   runApp(
@@ -27,7 +27,6 @@ class HomePrinterView extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () async {
                   await PosTicket.bindPrinterService();
-                  await PosTicket.initPrinter();
 
                   await PosTicket.printText(
                       text: AppConst.nameCompany, bold: true, size: 20);
@@ -79,7 +78,7 @@ class HomePrinterView extends StatelessWidget {
             //     // in table
             //     onPressed: () async {
             //       await PosTicket.bindPrinterService();
-            //       await PosTicket.initPrinter();
+            //
             //       await PosTicket.printTable(size: 21, cols: [
             //         ColumnMaker(text: 'Name', width: 10, align: 0),
             //         ColumnMaker(text: 'Qty', width: 6, align: 1),
@@ -106,7 +105,6 @@ class HomePrinterView extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () async {
                   await PosTicket.bindPrinterService();
-                  await PosTicket.initPrinter();
 
                   await PosTicket.printText(
                       text: AppConst.nameCompany2, bold: true, size: 20);
@@ -161,7 +159,6 @@ class HomePrinterView extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () async {
                   await PosTicket.bindPrinterService();
-                  await PosTicket.initPrinter();
 
                   await PosTicket.printBarCode(
                       dataBarCode: "0123648445",
@@ -177,7 +174,15 @@ class HomePrinterView extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () async {
                   await PosTicket.bindPrinterService();
-                  await PosTicket.initPrinter();
+                  await PosTicket.startPrinterExam();
+                },
+                child: const Text("Ví dụ"),
+              ),
+            ),
+            Center(
+              child: ElevatedButton(
+                onPressed: () async {
+                  await PosTicket.bindPrinterService();
 
                   await PosTicket.setAlignment(1);
                   await PosTicket.printQr(
@@ -192,8 +197,6 @@ class HomePrinterView extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await PosTicket.initPrinter();
-
                   Uint8List byte =
                       await _getImageFromAsset('assets/images/dash.jpg');
                   await PosTicket.setAlignment(1);

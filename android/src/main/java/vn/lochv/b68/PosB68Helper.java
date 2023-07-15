@@ -1,4 +1,4 @@
-package vn.lochv.b68.utils;
+package vn.lochv.b68;
 
 import android.content.Context;
 import android.graphics.Bitmap;
