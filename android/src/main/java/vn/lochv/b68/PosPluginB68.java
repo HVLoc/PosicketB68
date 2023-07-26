@@ -96,10 +96,14 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
             case "PRINT_TEXT":
                 PrnStrFormat format = new PrnStrFormat();
                 String text = call.argument("text");
-                format.setStyle(call.argument("bold"));
-                format.setUnderline(call.argument("under_line"));
-                format.setTextScaleX(call.argument("text_scale_x"));
+                format.setStyle(posB68Helper.convertTextStyle(call.argument("style")));
+                format.setUnderline(call.argument("underLine"));
+//                format.setTextScaleX((float)call.argument("textScaleX"));
+//                format.setLetterSpacing((float)call.argument("letterSpacing"));
+//                format.setLineSpacing((float)call.argument("lineSpacing"));
+                format.setAli(posB68Helper.convertAli(call.argument("alignment")));
                 format.setTextSize(call.argument("size"));
+                format.setFont(posB68Helper.convertTextFont(call.argument("font")));
                 posB68Helper.printText(text, format);
                 result.success(true);
                 break;
@@ -116,7 +120,7 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
                 result.success(true);
                 break;
             case "SET_ALIGNMENT":
-                Layout.Alignment align = call.argument("alignment");
+                Layout.Alignment align = posB68Helper.convertAli(call.argument("alignment"));
 
                 posB68Helper.setAlign(align);
                 result.success(true);
@@ -149,7 +153,7 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
                 String dataQRCode = call.argument("data");
                 int heightQR = call.argument("height");
                 int widthQR = call.argument("width");
-                Layout.Alignment alignQR = call.argument("align");
+                Layout.Alignment alignQR = posB68Helper.convertAli(call.argument("align"));
                 posB68Helper.printQr(dataQRCode, heightQR, widthQR, alignQR);
                 result.success(true);
                 break;

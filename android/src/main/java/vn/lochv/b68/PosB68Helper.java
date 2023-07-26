@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.RemoteException;
 import android.text.Layout;
+import android.text.Layout.Alignment;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -15,9 +16,6 @@ import com.zcs.sdk.Sys;
 import com.zcs.sdk.print.PrnStrFormat;
 import com.zcs.sdk.print.PrnTextFont;
 import com.zcs.sdk.print.PrnTextStyle;
-
-import java.io.Console;
-import java.io.IOException;
 
 /**
  * <pre>
@@ -58,7 +56,8 @@ public class PosB68Helper {
     /**
      * init print service
      */
-    public void initSdk() {                   mDriverManager = DriverManager.getInstance();
+    public void initSdk() {
+        mDriverManager = DriverManager.getInstance();
         mPrinter = mDriverManager.getPrinter();
         mSys = mDriverManager.getBaseSysDevice();
         int status = mSys.sdkInit();
@@ -157,24 +156,14 @@ public class PosB68Helper {
     }
 
 
-    /**
-     * print text
-     * setPrinterStyle:Api require V4.2.22 or later, So use esc cmd instead when not
-     * supported
-     * More settings reference documentation {@link WoyouConsts}
-     * printTextWithFont:
-     * Custom fonts require V4.14.0 or later!
-     * You can put the custom font in the 'assets' directory and Specify the font
-     * name parameters
-     * in the Api.
-     */
     public void printText(String content, PrnStrFormat format) {
         if (mPrinter == null) {
             // TODO Service disconnection processing
             return;
         }
-
-        mPrinter.setPrintAppendString(content, format != null ? format : formatPos);
+        PrnStrFormat formatResult = format != null ? format : formatPos;
+        mPrinter.setPrintAppendString(content, formatResult);
+        mPrinter.setPrintStart();
 
     }
 
@@ -567,4 +556,46 @@ public class PosB68Helper {
 //        mPrinter.printBarCode("{C1234567890123456", 8, 90, 2, 2, null);
 //        mPrinter.lineWrap(1, null);
 //    }
+
+    //Convert Format
+    public Alignment convertAli(int alignment) {
+        switch (alignment) {
+            case 1:
+                return Alignment.ALIGN_OPPOSITE;
+            case 2:
+                return Alignment.ALIGN_CENTER;
+            default:
+                return Alignment.ALIGN_NORMAL;
+        }
+    }
+
+    public PrnTextStyle convertTextStyle(int style) {
+        switch (style) {
+            case 1:
+                return PrnTextStyle.BOLD;
+            case 2:
+                return PrnTextStyle.ITALIC;
+            case 3:
+                return PrnTextStyle.BOLD_ITALIC;
+            default:
+                return PrnTextStyle.NORMAL;
+        }
+    }
+
+    public PrnTextFont convertTextFont(int style) {
+        switch (style) {
+            case 1:
+                return PrnTextFont.DEFAULT;
+            case 2:
+                return PrnTextFont.DEFAULT_BOLD;
+            case 3:
+                return PrnTextFont.MONOSPACE;
+            case 4:
+                return PrnTextFont.SANS_SERIF;
+            case 5:
+                return PrnTextFont.SERIF;
+            default:
+                return PrnTextFont.CUSTOM;
+        }
+    }
 }

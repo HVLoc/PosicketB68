@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -29,45 +31,54 @@ class HomePrinterView extends StatelessWidget {
                   await PosTicket.bindPrinterService();
 
                   await PosTicket.printText(
-                      text: AppConst.nameCompany, bold: true, size: 20);
+                    text: AppConst.nameCompany,
+                    posFormatText: PosFormatText(
+                      textStyle: PosTextStyle.BOLD,
+                    ),
+                  );
                   await PosTicket.printText(
-                      text: AppConst.addressConpany,
-                      bold: false,
-                      size: 18,
-                      underLine: false);
+                    text: AppConst.addressConpany,
+                    posFormatText: PosFormatText(
+                      textSize: 18,
+                    ),
+                  );
                   await PosTicket.printText(
-                      text:
-                          "${AppConst.taxCodeName} ${AppConst.taxCodeCustomer}",
-                      bold: false,
-                      size: 20);
+                    text: "${AppConst.taxCodeName} ${AppConst.taxCodeCustomer}",
+                  );
                   await PosTicket.setAlignment(1);
                   await PosTicket.printText(
-                      text: AppConst.nameTicket, bold: false, size: 27);
+                    text: AppConst.nameTicket,
+                    posFormatText: PosFormatText(
+                      textSize: 27,
+                    ),
+                  );
                   await PosTicket.setAlignment(1);
                   await PosTicket.printText(
-                      text:
-                          "${AppConst.fareTicket} ${AppConst.moneyTicket} đồng",
-                      bold: false,
-                      size: 25);
+                    text: "${AppConst.fareTicket} ${AppConst.moneyTicket} đồng",
+                    posFormatText: PosFormatText(
+                      textSize: 25,
+                      textFont: PosTextFont.SERIF,
+                    ),
+                  );
                   await PosTicket.setAlignment(1);
                   //giờ vào
                   await PosTicket.printText(
-                      text:
-                          "${AppConst.ticketStartingDateHP} ${DateTime.now().hour} h ${DateTime.now().minute} p",
-                      bold: false,
-                      size: 20);
+                    text:
+                        "${AppConst.ticketStartingDateHP} ${DateTime.now().hour} h ${DateTime.now().minute} p",
+                  );
                   await PosTicket.setAlignment(1);
                   await PosTicket.printText(
-                      text:
-                          "${AppConst.day} ${DateTime.now().day} ${AppConst.month} ${DateTime.now().month} ${AppConst.year} ${DateTime.now().year}",
-                      bold: false,
-                      size: 19);
+                    text:
+                        "${AppConst.day} ${DateTime.now().day} ${AppConst.month} ${DateTime.now().month} ${AppConst.year} ${DateTime.now().year}",
+                  );
                   await PosTicket.setAlignment(1);
                   await PosTicket.printText(
-                      text:
-                          "${AppConst.ncc} ${AppConst.nameCompanyNCC} - ${AppConst.nameTaxCode} ${AppConst.taxCode} \n \t ${AppConst.custommerService} ${AppConst.phoneCustomerService}",
-                      bold: true,
-                      size: 17);
+                    text:
+                        "${AppConst.ncc} ${AppConst.nameCompanyNCC} - ${AppConst.nameTaxCode} ${AppConst.taxCode} \n \t ${AppConst.custommerService} ${AppConst.phoneCustomerService}",
+                    posFormatText: PosFormatText(
+                      textSize: 17,
+                    ),
+                  );
                   await PosTicket.printLine(3);
                 },
                 child: const Text("In vé"),
@@ -101,60 +112,60 @@ class HomePrinterView extends StatelessWidget {
             //     child: const Text("In bảng hoá đơn"),
             //   ),
             // ),
-            Center(
-              child: ElevatedButton(
-                onPressed: () async {
-                  await PosTicket.bindPrinterService();
+            // Center(
+            //   child: ElevatedButton(
+            //     onPressed: () async {
+            //       await PosTicket.bindPrinterService();
 
-                  await PosTicket.printText(
-                      text: AppConst.nameCompany2, bold: true, size: 20);
-                  await PosTicket.printText(
-                      text: AppConst.addressConpany2,
-                      bold: false,
-                      size: 18,
-                      underLine: false);
-                  await PosTicket.printText(
-                      text:
-                          "${AppConst.taxCodeName} ${AppConst.taxCodeCustomer}",
-                      bold: false,
-                      size: 21);
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printText(
-                      text: AppConst.nameTicket2, bold: false, size: 30);
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printText(
-                      text: AppConst.location, bold: false, size: 27);
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printText(
-                      text:
-                          "${AppConst.fareTicket} ${AppConst.moneyTicket2} đồng",
-                      bold: false,
-                      size: 25);
+            //       await PosTicket.printText(
+            //           text: AppConst.nameCompany2, bold: true, size: 20);
+            //       await PosTicket.printText(
+            //           text: AppConst.addressConpany2,
+            //           bold: false,
+            //           size: 18,
+            //           underLine: false);
+            //       await PosTicket.printText(
+            //           text:
+            //               "${AppConst.taxCodeName} ${AppConst.taxCodeCustomer}",
+            //           bold: false,
+            //           size: 21);
+            //       await PosTicket.setAlignment(1);
+            //       await PosTicket.printText(
+            //           text: AppConst.nameTicket2, bold: false, size: 30);
+            //       await PosTicket.setAlignment(1);
+            //       await PosTicket.printText(
+            //           text: AppConst.location, bold: false, size: 27);
+            //       await PosTicket.setAlignment(1);
+            //       await PosTicket.printText(
+            //           text:
+            //               "${AppConst.fareTicket} ${AppConst.moneyTicket2} đồng",
+            //           bold: false,
+            //           size: 25);
 
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printText(
-                      text:
-                          "${AppConst.ticketStartingDate} ${DateTime.now().hour} h ${DateTime.now().minute} p ",
-                      bold: false,
-                      size: 20);
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printText(
-                      text:
-                          "${AppConst.day} ${DateTime.now().day} ${AppConst.month} ${DateTime.now().month} ${AppConst.year} ${DateTime.now().year}",
-                      bold: false,
-                      size: 19);
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printText(
-                      text:
-                          "${AppConst.ncc} ${AppConst.nameCompanyNCC} - ${AppConst.nameTaxCode} ${AppConst.taxCode} \n \t ${AppConst.custommerService} ${AppConst.phoneCustomerService}",
-                      bold: true,
-                      size: 17);
+            //       await PosTicket.setAlignment(1);
+            //       await PosTicket.printText(
+            //           text:
+            //               "${AppConst.ticketStartingDate} ${DateTime.now().hour} h ${DateTime.now().minute} p ",
+            //           bold: false,
+            //           size: 20);
+            //       await PosTicket.setAlignment(1);
+            //       await PosTicket.printText(
+            //           text:
+            //               "${AppConst.day} ${DateTime.now().day} ${AppConst.month} ${DateTime.now().month} ${AppConst.year} ${DateTime.now().year}",
+            //           bold: false,
+            //           size: 19);
+            //       await PosTicket.setAlignment(1);
+            //       await PosTicket.printText(
+            //           text:
+            //               "${AppConst.ncc} ${AppConst.nameCompanyNCC} - ${AppConst.nameTaxCode} ${AppConst.taxCode} \n \t ${AppConst.custommerService} ${AppConst.phoneCustomerService}",
+            //           bold: true,
+            //           size: 17);
 
-                  await PosTicket.printLine(3);
-                },
-                child: const Text("Bắc Ninh - Thanh Hoá"),
-              ),
-            ),
+            //       await PosTicket.printLine(3);
+            //     },
+            //     child: const Text("Bắc Ninh - Thanh Hoá"),
+            //   ),
+            // ),
             Center(
               child: ElevatedButton(
                 onPressed: () async {
@@ -184,11 +195,58 @@ class HomePrinterView extends StatelessWidget {
                 onPressed: () async {
                   await PosTicket.bindPrinterService();
 
+                  await PosTicket.printText(
+                    text: "DEFAULT",
+                    posFormatText: PosFormatText(
+                      textFont: PosTextFont.DEFAULT,
+                    ),
+                  );
+                  await PosTicket.printText(
+                    text: "DEFAULT_BOLD",
+                    posFormatText: PosFormatText(
+                      textFont: PosTextFont.DEFAULT_BOLD,
+                    ),
+                  );
+                  await PosTicket.printText(
+                    text: "MONOSPACE",
+                    posFormatText: PosFormatText(
+                      textFont: PosTextFont.MONOSPACE,
+                    ),
+                  );
+                  await PosTicket.printText(
+                    text: "SANS_SERIF",
+                    posFormatText: PosFormatText(
+                      textFont: PosTextFont.SANS_SERIF,
+                    ),
+                  );
+                  await PosTicket.printText(
+                    text: "SERIF",
+                    posFormatText: PosFormatText(
+                      textFont: PosTextFont.SERIF,
+                    ),
+                  );
+                  await PosTicket.printText(
+                    text: "CUSTOM",
+                    posFormatText: PosFormatText(
+                      textFont: PosTextFont.CUSTOM,
+                    ),
+                  );
+                  await PosTicket.printLine(3);
+                },
+                child: const Text("Text Font "),
+              ),
+            ),
+            Center(
+              child: ElevatedButton(
+                onPressed: () async {
+                  await PosTicket.bindPrinterService();
+
                   await PosTicket.setAlignment(1);
                   await PosTicket.printQr(
-                      dataQRCode: "https://github.com/hueht21",
-                      modulesize: 5,
-                      errorlevel: 2);
+                    dataQRCode: "https://github.com/HVLoc",
+                    modulesize: 20,
+                    align: PosAlignment.ALIGN_CENTER,
+                  );
                   await PosTicket.printLine(3);
                 },
                 child: const Text("qr code"),

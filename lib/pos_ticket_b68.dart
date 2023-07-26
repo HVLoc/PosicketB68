@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:pos_ticket_b68/src.dart';
 
 class PosTicket {
   static const platform = MethodChannel('posTicketB68/method_channel');
@@ -10,12 +11,6 @@ class PosTicket {
     final bool? status = await platform.invokeMethod('BIND_PRINTER_SERVICE');
     return status;
   }
-
-  // static Future<bool?> unbindPrinterService() async {
-  //   // Tắt máy in
-  //   final bool? status = await platform.invokeMethod('UNBIND_PRINTER_SERVICE');
-  //   return status;
-  // }
 
   static Future<bool?> initPrinter() async {
     // start máy in
@@ -54,7 +49,8 @@ class PosTicket {
     int len = 31,
   }) async {
     resetFontSize();
-    await printText(text: List.filled(len, ch[0]).join());
+    await printText(
+        text: List.filled(len, ch[0]).join(), posFormatText: PosFormatText());
   }
 
   ///*line*
@@ -65,25 +61,27 @@ class PosTicket {
     int len = 18,
   }) async {
     resetFontSize();
-    await printText(text: List.filled(len, ch).join());
+    await printText(
+        text: List.filled(len, ch).join(), posFormatText: PosFormatText());
   }
 
   static Future<void> printText({
     required String text,
-    int size = 24,
-    bool bold = false,
-    bool underLine = false,
-    String? typeface,
-    bool isLight = false,
-    bool isExtra = false,
+    PosFormatText? posFormatText,
   }) async {
+    if (posFormatText == null) {
+      posFormatText = PosFormatText();
+    }
     Map<String, dynamic> arguments = <String, dynamic>{
       "text": '$text\n',
-      "size": size,
-      "bold": bold,
-      "under_line": underLine,
-      "is_light": isLight,
-      "is_extra": isExtra
+      "size": posFormatText.textSize,
+      "style": posFormatText.textStyle,
+      "underLine": posFormatText.isUnderline,
+      "textScaleX": posFormatText.textScaleX,
+      "letterSpacing": posFormatText.letterSpacing,
+      "lineSpacing": posFormatText.lineSpacing,
+      "alignment": posFormatText.alignment,
+      "font": posFormatText.textFont,
     };
     await platform.invokeMethod("PRINT_TEXT", arguments);
   }
@@ -130,11 +128,12 @@ class PosTicket {
   static Future<void> printQr(
       {required String dataQRCode,
       required int modulesize,
-      required int errorlevel}) async {
+      required int align}) async {
     Map<String, dynamic> arguments = <String, dynamic>{
       "data": dataQRCode,
-      "modulesize": modulesize,
-      "errorlevel": errorlevel
+      "height": modulesize,
+      "width": modulesize,
+      "align": align
     };
     await platform.invokeMethod("PRINT_QRCODE", arguments);
   }
