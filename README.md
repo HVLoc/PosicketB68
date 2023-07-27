@@ -3,7 +3,7 @@
 # I have implemented a lot of other features described below, the typeface is bolder
 # I have updated version 1.0.7 with more features
 # Important:
-**THIS PACKAGE WILL WORK ONLY IN ANDROID!**
+**THIS PACKAGE WILL WORK ONLY IN ANDROID! POSB68**
 - [x] Jump (n) lines
 - [x] Bold mode on/off
 - [x] Adjustable font size
