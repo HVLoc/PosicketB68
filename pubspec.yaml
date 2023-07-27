@@ -1,8 +1,8 @@
 name: pos_ticket_b68
-description: This is a printer product written by cudev
+description: This is a printer product written by LocHV
 homepage: https://github.com/HVLoc/PosTicketB68
 
-version: 1.0.1
+version: 1.0.2
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
@@ -11,8 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.17.0
-  cupertino_icons: ^1.0.2
+  intl: ^0.18.0
+  cupertino_icons: ^1.0.3
 
 dev_dependencies:
   flutter_test:
