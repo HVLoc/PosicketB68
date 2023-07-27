@@ -1,13 +1,12 @@
 name: pos_ticket_b68
 description: This is a printer product written by cudev
-homepage: https://github.com/hueht21/SunmiPrintEasyTicket
+homepage: https://github.com/HVLoc/PosTicketB68
 
-
-version: 1.0.7
+version: 1.0.0
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
-  flutter: ">=1.12.0"
+  flutter: "3.10.5"
 
 dependencies:
   flutter:
