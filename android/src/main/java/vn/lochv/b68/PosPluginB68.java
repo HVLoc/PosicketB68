@@ -98,9 +98,9 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
                 String text = call.argument("text");
                 format.setStyle(posB68Helper.convertTextStyle(call.argument("style")));
                 format.setUnderline(call.argument("underLine"));
-//                format.setTextScaleX((float)call.argument("textScaleX"));
-//                format.setLetterSpacing((float)call.argument("letterSpacing"));
-//                format.setLineSpacing((float)call.argument("lineSpacing"));
+                format.setTextScaleX(Float.parseFloat(call.argument("textScaleX").toString()));
+                format.setLetterSpacing(Float.parseFloat(call.argument("letterSpacing").toString()));
+                format.setLineSpacing(Float.parseFloat(call.argument("lineSpacing").toString()));
                 format.setAli(posB68Helper.convertAli(call.argument("alignment")));
                 format.setTextSize(call.argument("size"));
                 format.setFont(posB68Helper.convertTextFont(call.argument("font")));

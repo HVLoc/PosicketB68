@@ -41,7 +41,7 @@ class PosFormatText {
     this.isUnderline = false,
     this.textSize = 20,
     this.textScaleX = 1,
-    this.letterSpacing = -0.5,
+    this.letterSpacing = -0.05,
     this.lineSpacing = 1,
     this.alignment = PosAlignment.ALIGN_NORMAL,
     this.textStyle = PosTextStyle.NORMAL,

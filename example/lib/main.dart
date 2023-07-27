@@ -50,6 +50,7 @@ class HomePrinterView extends StatelessWidget {
                     text: AppConst.nameTicket,
                     posFormatText: PosFormatText(
                       textSize: 27,
+                      alignment: PosAlignment.ALIGN_CENTER,
                     ),
                   );
                   await PosTicket.setAlignment(1);
