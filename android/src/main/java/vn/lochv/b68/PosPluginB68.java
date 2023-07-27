@@ -178,8 +178,8 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
             // result.success(true);
             // break;
             case "PRINT_STATUS":
-                posB68Helper.showPrinterStatus();
-                result.success(true);
+             String status = posB68Helper.showPrinterStatus();
+                result.success(status);
                 break;
             case "OPEN_CASH_BOX":
                 posB68Helper.openCashBox();

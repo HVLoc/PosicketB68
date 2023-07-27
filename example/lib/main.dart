@@ -1,16 +1,27 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:pos_ticket_b68/pos_ticket_b68.dart.dart';
 
+bool canPrint = false;
+
 Future<void> main() async {
+  if (Platform.isAndroid) {
+    try {
+      await PosTicket.bindPrinterService();
+      canPrint = true;
+    } catch (e) {
+      canPrint = false;
+    }
+  }
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Application",
         home: HomePrinterView()),
   );
-  await PosTicket.bindPrinterService();
 }
 
 class HomePrinterView extends StatelessWidget {
@@ -95,6 +106,22 @@ class HomePrinterView extends StatelessWidget {
                   await PosTicket.cutPaper();
                 },
                 child: const Text("In vé"),
+              ),
+            ),
+            Center(
+              child: ElevatedButton(
+                onPressed: () async {
+                  String status = await PosTicket.printStatus();
+
+                  await PosTicket.printText(
+                    text: "Status:  $status",
+                    posFormatText: PosFormatText(
+                      textSize: 17,
+                      alignment: PosAlignment.ALIGN_CENTER,
+                    ),
+                  );
+                },
+                child: const Text("Status"),
               ),
             ),
             Center(

@@ -160,7 +160,6 @@ public class PosB68Helper {
         PrnStrFormat formatResult = format != null ? format : formatPos;
         mPrinter.setPrintAppendString(content, formatResult);
         mPrinter.setPrintStart();
-
     }
 
 
