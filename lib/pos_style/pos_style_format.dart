@@ -1,4 +1,4 @@
-import '../src.dart';
+import '../pos_ticket_b68.dart.dart';
 
 class PosFormatText {
   final bool isUnderline;

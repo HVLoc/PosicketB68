@@ -1,7 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/services.dart';
-import 'package:pos_ticket_b68/src.dart';
+import 'package:pos_ticket_b68/pos_ticket_b68.dart.dart';
 
 class PosTicket {
   static const platform = MethodChannel('posTicketB68/method_channel');
@@ -137,18 +135,6 @@ class PosTicket {
     };
     await platform.invokeMethod("PRINT_QRCODE", arguments);
   }
-
-  // static Future<void> printTable(
-  //     {required List<ColumnMaker> cols, int? size}) async {
-  //   size ??= 20;
-  //   final _jsonCols = List<Map<String, String>>.from(
-  //       cols.map<Map<String, String>>((ColumnMaker col) => col.toJson()));
-  //   Map<String, dynamic> arguments = <String, dynamic>{
-  //     "cols": json.encode(_jsonCols),
-  //     "size": size
-  //   };
-  //   await platform.invokeMethod("PRINT_TABLE", arguments);
-  // }
 
   static Future<String> printStatus() async {
     return await platform.invokeMethod("PRINT_STATUS");

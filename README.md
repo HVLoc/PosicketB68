@@ -8,7 +8,6 @@
 - [x] Bold mode on/off
 - [x] Adjustable font size
 - [x] Can print qrcode
-- [x] Can print table
 - [x] Use SignikaNegative-Bold font as large font
 - [x] Use OpenSans-Bold font as large font
 - [x] Set font size 20 as center font size to separate two typefaces
@@ -16,7 +15,7 @@
 
 ## Tested Devices
 
-Sunmi V2 Pro
+B68
 
 ## import packages
 import 'package:posTicketB68/features/printer_pos/service_printer_pos/sunmi_printer.dart';

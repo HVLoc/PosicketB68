@@ -1,2 +1,4 @@
 
-- version 1.0.7
+- v1.0.0
+
+Phát hành SDK hỗ trợ máy pos B68

@@ -1,9 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:pos_ticket_b68/src.dart';
+import 'package:pos_ticket_b68/pos_ticket_b68.dart.dart';
 
 Future<void> main() async {
   runApp(
@@ -85,88 +83,6 @@ class HomePrinterView extends StatelessWidget {
                 child: const Text("In vé"),
               ),
             ),
-            // Center(
-            //   child: ElevatedButton(
-            //     // in table
-            //     onPressed: () async {
-            //       await PosTicket.bindPrinterService();
-            //
-            //       await PosTicket.printTable(size: 21, cols: [
-            //         ColumnMaker(text: 'Name', width: 10, align: 0),
-            //         ColumnMaker(text: 'Qty', width: 6, align: 1),
-            //         ColumnMaker(text: 'UN', width: 10, align: 2),
-            //         ColumnMaker(text: 'TOT', width: 10, align: 2),
-            //       ]);
-            //       await PosTicket.printTable(cols: [
-            //         ColumnMaker(text: 'Fries', width: 10, align: 0),
-            //         ColumnMaker(text: '4x', width: 6, align: 1),
-            //         ColumnMaker(text: '3.00', width: 10, align: 2),
-            //         ColumnMaker(text: '12.00', width: 10, align: 2),
-            //       ]);
-            //       await PosTicket.printTable(cols: [
-            //         ColumnMaker(text: 'Sản phẩm A', width: 10, align: 0),
-            //         ColumnMaker(text: '4x', width: 6, align: 1),
-            //         ColumnMaker(text: '30.00000', width: 10, align: 2),
-            //         ColumnMaker(text: '120.00000', width: 10, align: 2),
-            //       ]);
-            //     },
-            //     child: const Text("In bảng hoá đơn"),
-            //   ),
-            // ),
-            // Center(
-            //   child: ElevatedButton(
-            //     onPressed: () async {
-            //       await PosTicket.bindPrinterService();
-
-            //       await PosTicket.printText(
-            //           text: AppConst.nameCompany2, bold: true, size: 20);
-            //       await PosTicket.printText(
-            //           text: AppConst.addressConpany2,
-            //           bold: false,
-            //           size: 18,
-            //           underLine: false);
-            //       await PosTicket.printText(
-            //           text:
-            //               "${AppConst.taxCodeName} ${AppConst.taxCodeCustomer}",
-            //           bold: false,
-            //           size: 21);
-            //       await PosTicket.setAlignment(1);
-            //       await PosTicket.printText(
-            //           text: AppConst.nameTicket2, bold: false, size: 30);
-            //       await PosTicket.setAlignment(1);
-            //       await PosTicket.printText(
-            //           text: AppConst.location, bold: false, size: 27);
-            //       await PosTicket.setAlignment(1);
-            //       await PosTicket.printText(
-            //           text:
-            //               "${AppConst.fareTicket} ${AppConst.moneyTicket2} đồng",
-            //           bold: false,
-            //           size: 25);
-
-            //       await PosTicket.setAlignment(1);
-            //       await PosTicket.printText(
-            //           text:
-            //               "${AppConst.ticketStartingDate} ${DateTime.now().hour} h ${DateTime.now().minute} p ",
-            //           bold: false,
-            //           size: 20);
-            //       await PosTicket.setAlignment(1);
-            //       await PosTicket.printText(
-            //           text:
-            //               "${AppConst.day} ${DateTime.now().day} ${AppConst.month} ${DateTime.now().month} ${AppConst.year} ${DateTime.now().year}",
-            //           bold: false,
-            //           size: 19);
-            //       await PosTicket.setAlignment(1);
-            //       await PosTicket.printText(
-            //           text:
-            //               "${AppConst.ncc} ${AppConst.nameCompanyNCC} - ${AppConst.nameTaxCode} ${AppConst.taxCode} \n \t ${AppConst.custommerService} ${AppConst.phoneCustomerService}",
-            //           bold: true,
-            //           size: 17);
-
-            //       await PosTicket.printLine(3);
-            //     },
-            //     child: const Text("Bắc Ninh - Thanh Hoá"),
-            //   ),
-            // ),
             Center(
               child: ElevatedButton(
                 onPressed: () async {
