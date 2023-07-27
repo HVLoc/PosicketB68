@@ -18,50 +18,39 @@
 B68
 
 ## import packages
-import 'package:posTicketB68/features/printer_pos/service_printer_pos/sunmi_printer.dart';
-// all method from sunmi printer need to async await
+import 'package:pos_ticket_b68/pos_ticket_b68.dart.dart';
+                
+await PosTicket.bindPrinterService();// Initialize the printer
 
-await SunmiPrinter.bindPrinterService(); // Initialize the printer
-await SunmiPrinter.startPrinter(); // start printer
-await SunmiPrinter.printLine(3); // Jump (3) lines
-await SunmiPrinter.cutPaper(); //
-await SunmiPrinter.unbindPrinterService(); // unbind printer
  ```
 ## Example of printing a parking ticket
-    await SunmiPrinter.startPrinter();
-    await SunmiPrinter.printText(text: AppConst.nameCompany, bold: true, size: 20);
-    await SunmiPrinter.printText(text: "${AppConst.taxCodeName} ${AppConst.taxCodeCustomer}", bold: false, size: 20); // size =20 : font size printer
-    await SunmiPrinter.setAlignment(1); // 0 : Left align , 1 : Center align, 2 : Right align
-    await SunmiPrinter.printLine(3); // Jump (3) lines
-    await SunmiPrinter.cutPaper(); // Dedicated method just to cut the line
+    await PosTicket.bindPrinterService();/
+    await PosTicket.printText(
+       text: AppConst.addressConpany,
+       posFormatText: PosFormatText(
+        textSize: 18,
+       ),
+    );
+    await PosTicket.printLine(3); // Jump (3) lines
 
-## Example of printing invoice table
-    await SunmiPrinter.printTable(size: 21, cols: [
-        ColumnMaker(text: 'Name', width: 10, align: 0), // width: 10 Width of column , 0 - LEFT, 1 - CENTER, 2 - RIGHT  
-        ColumnMaker(text: 'Qty', width: 6, align: 1),
-        ColumnMaker(text: 'UN', width: 10, align: 2),
-        ColumnMaker(text: 'TOT', width: 10, align: 2),
-    ]);
-    await SunmiPrinter.printTable(cols: [
-        ColumnMaker(text: 'Sản phẩm A', width: 10, align: 0),
-        ColumnMaker(text: '4x', width: 6, align: 1),
-        ColumnMaker(text: '30.00000', width: 10, align: 2),
-        ColumnMaker(text: '120.00000', width: 10, align: 2),
-    ]);
-    class ColumnMaker {
-        String text;
-        int width;
-        int align;
-        ColumnMaker({
-            this.text = '',
-            this.width = 2,
-            this.align = 0,
-        });
-        }
-    }
+## Example
+    await PosTicket.bindPrinterService();
+    await PosTicket.startPrinterExam();
+
 ## Example of printing qrcode
-    await SunmiPrinter.setAlignment(1); // Adjust the qrcode in the center position
-    await SunmiPrinter.printQr(
-        dataQRCode:"https://github.com/hueht21",
-        modulesize: 5,
-        errorlevel: 2);
+    await PosTicket.bindPrinterService();
+    await PosTicket.setAlignment(1);
+    await PosTicket.printQr(
+      dataQRCode: "https://github.com/HVLoc",
+      modulesize: 20,
+      align: PosAlignment.ALIGN_CENTER,
+    );
+    await PosTicket.printLine(3);
+
+## Set Font 
+    await PosTicket.printText(
+        text: "DEFAULT",
+        posFormatText: PosFormatText(
+            textFont: PosTextFont.DEFAULT,
+        ),
+    );
