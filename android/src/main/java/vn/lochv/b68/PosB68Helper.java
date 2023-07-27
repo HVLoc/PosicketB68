@@ -91,14 +91,14 @@ public class PosB68Helper {
      * Initialize the printer
      * All style settings will be restored to default
      */
-//    public void initPrinter() {
-//        if (mPrinter == null) {
-//            // TODO Service disconnection processing
-//            return;
-//            // "String".getBytes();
-//        }
-//        mPrinter.setPrintStart();
-//    }
+   public void initPrinter() {
+        mPrinter = mDriverManager.getPrinter();
+        if (mPrinter == null) {
+           // TODO Service disconnection processing
+           return;
+       }
+       
+   }
 
     /**
      * paper feed three lines

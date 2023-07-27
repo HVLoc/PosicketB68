@@ -37,7 +37,7 @@ class HomePrinterView extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await PosTicket.bindPrinterService();
+                  await PosTicket.initPrinter();
 
                   await PosTicket.printText(
                     text: AppConst.nameCompany,
@@ -127,7 +127,7 @@ class HomePrinterView extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await PosTicket.bindPrinterService();
+                  await PosTicket.initPrinter();
 
                   await PosTicket.printBarCode(
                       dataBarCode: "0123648445",
@@ -142,7 +142,7 @@ class HomePrinterView extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await PosTicket.bindPrinterService();
+                  await PosTicket.initPrinter();
                   await PosTicket.startPrinterExam();
                 },
                 child: const Text("Ví dụ"),
@@ -151,7 +151,7 @@ class HomePrinterView extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await PosTicket.bindPrinterService();
+                  await PosTicket.initPrinter();
 
                   await PosTicket.printText(
                     text: "DEFAULT",
@@ -197,12 +197,12 @@ class HomePrinterView extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  await PosTicket.bindPrinterService();
+                  await PosTicket.initPrinter();
 
                   await PosTicket.setAlignment(1);
                   await PosTicket.printQr(
                     dataQRCode: "https://github.com/HVLoc",
-                    modulesize: 20,
+                    modulesize: 15,
                     align: PosAlignment.ALIGN_CENTER,
                   );
                   await PosTicket.printLine(3);

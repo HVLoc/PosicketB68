@@ -129,8 +129,8 @@ class PosTicket {
       required int align}) async {
     Map<String, dynamic> arguments = <String, dynamic>{
       "data": dataQRCode,
-      "height": modulesize,
-      "width": modulesize,
+      "height": modulesize * 10,
+      "width": modulesize * 10,
       "align": align
     };
     await platform.invokeMethod("PRINT_QRCODE", arguments);

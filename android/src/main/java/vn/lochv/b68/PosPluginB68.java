@@ -58,7 +58,7 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
         Log.d("POS", call.method);
         switch (call.method) {
             case "BIND_PRINTER_SERVICE":
-                posB68Helper.initSdk();
+                posB68Helper.initPrinter();
                 result.success(true);
                 break;
             // case "UNBIND_PRINTER_SERVICE":
@@ -69,10 +69,10 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
                 posB68Helper.printExample();
                 result.success(true);
                 break;
-            // case "INIT_PRINTER":
-            // posB68Helper.initPrinter();
-            // result.success(true);
-            // break;
+            case "INIT_PRINTER":
+            posB68Helper.initSdk();
+            result.success(true);
+            break;
             // case "ENTER_PRINTER_BUFFER":
             // Boolean clearEnter = call.argument("clearEnter");
             // posB68Helper.exitPrinterBuffer(clearEnter);
