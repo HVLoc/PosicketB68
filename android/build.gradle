@@ -45,7 +45,7 @@ android {
 
 
 dependencies {
-    implementation files('libs/core-3.3.0.jar')
+    implementation files('libs/core-3.2.1.jar')
     implementation files('libs/SmartPos_1.7.0_R230208.jar')
     implementation 'androidx.core:core:1.9.0'
     implementation 'com.sunmi:printerlibrary:1.0.18'

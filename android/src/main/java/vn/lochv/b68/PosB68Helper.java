@@ -41,10 +41,7 @@ public class PosB68Helper {
 
     public PosB68Helper(Context context) {
         this._context = context;
-
-
     }
-
 
     private static final String TAG = "PrintB68";
 
