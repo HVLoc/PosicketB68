@@ -24,7 +24,6 @@ import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.plugin.common.MethodChannel;
 
-import com.google.zxing.BarcodeFormat;
 import com.zcs.sdk.DriverManager;
 import com.zcs.sdk.Sys;
 import com.zcs.sdk.print.PrnStrFormat;
@@ -117,6 +116,7 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
 
             case "CUT_PAPER":
                 posB68Helper.print3Line();
+                posB68Helper.print3Line();
                 result.success(true);
                 break;
             case "SET_ALIGNMENT":
@@ -139,16 +139,6 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
             // String serialNo = posB68Helper.getPrinterSerialNo();
             // result.success(serialNo);
             // break;
-            case "PRINT_BARCODE":
-                String dataBarCode = call.argument("data");
-                int height = call.argument("height");
-                int width = call.argument("width");
-                Layout.Alignment ali = call.argument("align");
-                BarcodeFormat barcodeFormat = call.argument("format");
-                Log.d("PRINT_BARCODE", dataBarCode + height + width + ali.name() + "");
-                posB68Helper.printBarCode(dataBarCode, height, width, ali, barcodeFormat);
-                result.success(true);
-                break;
             case "PRINT_QRCODE":
                 String dataQRCode = call.argument("data");
                 int heightQR = call.argument("height");

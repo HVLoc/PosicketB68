@@ -85,7 +85,7 @@ class HomePrinterView extends StatelessWidget {
 
                   await PosTicket.printText(
                     text:
-                        "${AppConst.ncc} ${AppConst.nameCompanyNCC} - ${AppConst.nameTaxCode} ${AppConst.taxCode} ${AppConst.custommerService} ${AppConst.phoneCustomerService}",
+                        "${AppConst.ncc} ${AppConst.nameCompanyNCC}-${AppConst.nameTaxCode} ${AppConst.taxCode}-${AppConst.custommerService} ${AppConst.phoneCustomerService}",
                     posFormatText: PosFormatText(
                       textSize: 17,
                       alignment: PosAlignment.ALIGN_CENTER,
@@ -225,10 +225,10 @@ class AppConst {
   static const String month = "tháng";
   static const String year = "năm";
   static const String ncc = "NCC";
-  static const String nameTaxCode = "MST";
+  static const String nameTaxCode = "MST: ";
   static const String taxCode = "1342543566";
   static const String nameCompanyNCC = "LocHV";
-  static const String custommerService = "CSKH";
+  static const String custommerService = "CSKH: ";
   static const String moneyTicket = "50,000";
   static const String phoneCustomerService = "0123456580";
   static const String taxCodeName = "Mã số thuế:";

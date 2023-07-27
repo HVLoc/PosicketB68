@@ -8,7 +8,6 @@ import android.text.Layout.Alignment;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.zxing.BarcodeFormat;
 import com.zcs.sdk.DriverManager;
 import com.zcs.sdk.Printer;
 import com.zcs.sdk.SdkResult;
@@ -164,23 +163,6 @@ public class PosB68Helper {
 
     }
 
-
-    /**
-     * print Bar Code
-     */
-    public void printBarCode(String data, int height, int width, Layout.Alignment alignment, BarcodeFormat format) {
-        if (mPrinter == null) {
-            // TODO Service disconnection processing
-            return;
-        }
-
-        int printStatus = mPrinter.getPrinterStatus();
-        if (printStatus != SdkResult.SDK_PRN_STATUS_PAPEROUT) {
-            mPrinter.setPrintAppendBarCode(_context, data, width, height, true, alignment != null ? alignment : Layout.Alignment.ALIGN_CENTER, format != null ? format : BarcodeFormat.CODE_128);
-            printStatus = mPrinter.setPrintStart();
-        }
-
-    }
 
     /**
      * print Qr Code
