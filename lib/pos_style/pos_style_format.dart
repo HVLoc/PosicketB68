@@ -42,7 +42,7 @@ class PosFormatText {
     this.textSize = 20,
     this.textScaleX = 1,
     this.letterSpacing = -0.05,
-    this.lineSpacing = 1,
+    this.lineSpacing = 0.5,
     this.alignment = PosAlignment.ALIGN_NORMAL,
     this.textStyle = PosTextStyle.NORMAL,
     this.textFont = PosTextFont.DEFAULT,

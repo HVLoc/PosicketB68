@@ -51,34 +51,48 @@ class HomePrinterView extends StatelessWidget {
                       alignment: PosAlignment.ALIGN_CENTER,
                     ),
                   );
-                  await PosTicket.setAlignment(1);
+                  await PosTicket.printText(
+                    text: "BKS: 12346",
+                    posFormatText: PosFormatText(
+                      textSize: 30,
+                      alignment: PosAlignment.ALIGN_CENTER,
+                      lineSpacing: 0.5,
+                    ),
+                  );
                   await PosTicket.printText(
                     text: "${AppConst.fareTicket} ${AppConst.moneyTicket} đồng",
                     posFormatText: PosFormatText(
                       textSize: 25,
-                      textFont: PosTextFont.SERIF,
+                      alignment: PosAlignment.ALIGN_CENTER,
                     ),
                   );
-                  await PosTicket.setAlignment(1);
                   //giờ vào
                   await PosTicket.printText(
                     text:
                         "${AppConst.ticketStartingDateHP} ${DateTime.now().hour} h ${DateTime.now().minute} p",
+                    posFormatText: PosFormatText(
+                      alignment: PosAlignment.ALIGN_CENTER,
+                    ),
                   );
                   await PosTicket.setAlignment(1);
                   await PosTicket.printText(
                     text:
                         "${AppConst.day} ${DateTime.now().day} ${AppConst.month} ${DateTime.now().month} ${AppConst.year} ${DateTime.now().year}",
-                  );
-                  await PosTicket.setAlignment(1);
-                  await PosTicket.printText(
-                    text:
-                        "${AppConst.ncc} ${AppConst.nameCompanyNCC} - ${AppConst.nameTaxCode} ${AppConst.taxCode} \n \t ${AppConst.custommerService} ${AppConst.phoneCustomerService}",
                     posFormatText: PosFormatText(
-                      textSize: 17,
+                      alignment: PosAlignment.ALIGN_OPPOSITE,
                     ),
                   );
-                  await PosTicket.printLine(3);
+
+                  await PosTicket.printText(
+                    text:
+                        "${AppConst.ncc} ${AppConst.nameCompanyNCC} - ${AppConst.nameTaxCode} ${AppConst.taxCode} ${AppConst.custommerService} ${AppConst.phoneCustomerService}",
+                    posFormatText: PosFormatText(
+                      textSize: 17,
+                      alignment: PosAlignment.ALIGN_CENTER,
+                    ),
+                  );
+
+                  await PosTicket.cutPaper();
                 },
                 child: const Text("In vé"),
               ),
@@ -201,21 +215,22 @@ class HomePrinterView extends StatelessWidget {
 }
 
 class AppConst {
-  static const String nameCompany = "CÔNG TY TNHH GIẢI PHÁP ĐÔ THỊ NAM HẢI";
-  static const String addressConpany = "Số 33 Ngõ 151 Láng Hạ, Đống Đa, Hà Nội";
+  static const String nameCompany = "GIẢI PHÁP QUẢN LÝ CHỢ THÔNG MINH";
+  static const String addressConpany =
+      "Số 1212 Ngõ 4 Láng Hạ, Hoàng Mai, Hà Nội";
   static const String nameTicket = "VÉ TRÔNG GIỮ XE Ô TÔ";
   static const String fareTicket = "Giá vé: ";
   static const String ticketStartingDateHP = "Giờ xe vào:";
-  static const String day = "ngày";
+  static const String day = "Ngày";
   static const String month = "tháng";
   static const String year = "năm";
   static const String ncc = "NCC";
   static const String nameTaxCode = "MST";
-  static const String taxCode = "0105987432";
-  static const String nameCompanyNCC = "Softdreams";
+  static const String taxCode = "1342543566";
+  static const String nameCompanyNCC = "LocHV";
   static const String custommerService = "CSKH";
-  static const String moneyTicket = "25,000";
-  static const String phoneCustomerService = "19003369";
+  static const String moneyTicket = "50,000";
+  static const String phoneCustomerService = "0123456580";
   static const String taxCodeName = "Mã số thuế:";
   static const String taxCodeCustomer = "12589654";
 
