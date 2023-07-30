@@ -7,15 +7,9 @@ import 'package:pos_ticket_b68/pos_ticket_b68.dart.dart';
 
 bool canPrint = false;
 
-Future<void> main() async {
-  if (Platform.isAndroid) {
-    try {
-      await PosTicket.bindPrinterService();
-      canPrint = true;
-    } catch (e) {
-      canPrint = false;
-    }
-  }
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -24,7 +18,29 @@ Future<void> main() async {
   );
 }
 
-class HomePrinterView extends StatelessWidget {
+class HomePrinterView extends StatefulWidget {
+  @override
+  State<HomePrinterView> createState() => _HomePrinterViewState();
+}
+
+class _HomePrinterViewState extends State<HomePrinterView> {
+  @override
+  void initState() {
+    //Check có phải b68 không?
+    // Lỗi khi kp thiết bị b58 thì crash app
+    if (Platform.isAndroid) {
+      try {
+        PosTicket.bindPrinterService().then((value) {
+          print(value);
+          canPrint = true;
+        });
+      } catch (e) {
+        canPrint = false;
+      }
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

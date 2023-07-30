@@ -1,4 +1,4 @@
-package vn.softdreams.example;
+package vn.lochv.example;
 
 import io.flutter.embedding.android.FlutterActivity;
 

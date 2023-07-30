@@ -44,11 +44,6 @@ public class PosB68Helper {
 
     private static final String TAG = "PrintB68";
 
-    private void handleRemoteException(RemoteException e) {
-        e.printStackTrace();
-        Log.d("ERROR", e.getMessage());
-    }
-
     /**
      * init print service
      */
@@ -72,33 +67,17 @@ public class PosB68Helper {
     }
 
     /**
-     * deInit  print service
-     */
-//    public void deInitSunmiPrinterService() {
-//        try {
-//            if (mPrinter != null) {
-//                InnerPrinterManager.getInstance().unBindService(_context, innerPrinterCallback);
-//                mPrinter = null;
-//                sunmiPrinter = LostSunmiPrinter;
-//            }
-//        } catch (InnerPrinterException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-
-    /**
      * Initialize the printer
      * All style settings will be restored to default
      */
-   public void initPrinter() {
-        mPrinter = mDriverManager.getPrinter();
-        if (mPrinter == null) {
-           // TODO Service disconnection processing
-           return;
-       }
-       
-   }
+    public void initPrinter() {
+        try {
+            mDriverManager = DriverManager.getInstance();
+            mPrinter = mDriverManager.getPrinter();
+        } catch (Exception e) {
+            Log.d("Error", e.getMessage());
+        }
+    }
 
     /**
      * paper feed three lines
@@ -114,6 +93,21 @@ public class PosB68Helper {
 
     }
 
+    /**
+     * Get printer serial number
+     */
+//    public String getPrinterSerialNo(){
+//        if(mPrinter == null){
+//            //TODO Service disconnection processing
+//            return "";
+//        }
+//        try {
+//            return mPrinter.getPrinterStatus();
+//        } catch (RemoteException e) {
+//            handleRemoteException(e);
+//            return "";
+//        }
+//    }
     public void printLine(int line) {
         if (mPrinter == null) {
             // TODO Service disconnection processing
@@ -428,7 +422,7 @@ public class PosB68Helper {
     public String showPrinterStatus() {
         if (mPrinter == null) {
             // TODO Service disconnection processing
-            return "";
+            return "Chưa khởi tạo máy in";
         }
         String result = "Trạng thái không xác định";
         int res = mPrinter.getPrinterStatus();
@@ -479,19 +473,18 @@ public class PosB68Helper {
      * 演示打印一张标签
      * 打印单张标签后为了方便用户撕纸可调用labelOutput,将标签纸推出纸舱口
      */
-//    public void printOneLabel() {
-//        if (mPrinter == null) {
-//            // TODO Service disconnection processing
-//            return;
-//        }
-//        try {
-//            mPrinter.labelLocate();
-//            printLabelContent();
-//            mPrinter.labelOutput();
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void cutPaper() {
+        if (mPrinter == null) {
+            // TODO Service disconnection processing
+            return;
+        }
+        print3Line();
+        print3Line();
+        mPrinter.setPrintAppendString(" ", formatPos);
+        mPrinter.setPrintAppendString(" ", formatPos);
+        mPrinter.setPrintAppendString(" ", formatPos);
+        mPrinter.setPrintStart();
+    }
 
     /**
      * Demo printing multi label

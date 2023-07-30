@@ -58,8 +58,12 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
         Log.d("POS", call.method);
         switch (call.method) {
             case "BIND_PRINTER_SERVICE":
-                posB68Helper.initPrinter();
-                result.success(true);
+                try {
+                    posB68Helper.initPrinter();
+                    result.success(true);
+                } catch (Exception e) {
+                    result.success(false);
+                }
                 break;
             // case "UNBIND_PRINTER_SERVICE":
             // mSys.
@@ -115,8 +119,7 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
                 break;
 
             case "CUT_PAPER":
-                posB68Helper.print3Line();
-                posB68Helper.print3Line();
+                posB68Helper.cutPaper();
                 result.success(true);
                 break;
             case "SET_ALIGNMENT":
@@ -131,10 +134,10 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
             // result.success(true);
             // break;
 
-            // case "PRINTER_VERSION":
-            // String version = posB68Helper.getPrinterPaper();
-            // result.success(version);
-            // break;
+             case "PRINTER_VERSION":
+             String version = posB68Helper.getPrinterPaper();
+             result.success(version);
+             break;
             // case "PRINTER_SERIALNO":
             // String serialNo = posB68Helper.getPrinterSerialNo();
             // result.success(serialNo);

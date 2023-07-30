@@ -1,4 +1,4 @@
-# sunmi_printer_easyticket
+# pos_ticket_b68
 
 # I have implemented a lot of other features described below, the typeface is bolder
 # I have updated version 1.0.7 with more features
