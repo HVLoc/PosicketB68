@@ -138,10 +138,10 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
              String version = posB68Helper.getPrinterPaper();
              result.success(version);
              break;
-            // case "PRINTER_SERIALNO":
-            // String serialNo = posB68Helper.getPrinterSerialNo();
-            // result.success(serialNo);
-            // break;
+             case "PRINTER_SDK":
+             int printerStatus = posB68Helper.getPrinterStatus();
+             result.success(printerStatus);
+             break;
             case "PRINT_QRCODE":
                 String dataQRCode = call.argument("data");
                 int heightQR = call.argument("height");

@@ -96,18 +96,14 @@ public class PosB68Helper {
     /**
      * Get printer serial number
      */
-//    public String getPrinterSerialNo(){
-//        if(mPrinter == null){
-//            //TODO Service disconnection processing
-//            return "";
-//        }
-//        try {
-//            return mPrinter.getPrinterStatus();
-//        } catch (RemoteException e) {
-//            handleRemoteException(e);
-//            return "";
-//        }
-//    }
+    public int getPrinterStatus() {
+        if (mPrinter == null) {
+            return SdkResult.SDK_INSTALL_ERROR;
+        }
+        return mPrinter.getPrinterStatus();
+
+    }
+
     public void printLine(int line) {
         if (mPrinter == null) {
             // TODO Service disconnection processing

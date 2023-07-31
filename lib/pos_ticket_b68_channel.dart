@@ -99,8 +99,8 @@ class PosTicket {
     await platform.invokeMethod("PRINT_IMAGE", arguments);
   }
 
-  static Future<String> getPrinterSerialNo() async {
-    return await platform.invokeMethod("PRINTER_SERIALNO");
+  static Future<int> getPrinterSDK() async {
+    return await platform.invokeMethod("PRINTER_SDK");
   }
 
   static Future<void> printDrawRow() async {
