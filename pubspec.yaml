@@ -6,12 +6,12 @@ version: 1.0.2
 
 environment:
   sdk: ">=2.16.2 <4.0.0"
-  flutter: ">=3.10.5"
+  flutter: ">=3.3.2"
 
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.18.0
+  intl: ^0.17.0
   cupertino_icons: ^1.0.3
 
 dev_dependencies:
