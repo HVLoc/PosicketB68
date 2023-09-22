@@ -233,8 +233,9 @@ class _HomePrinterViewState extends State<HomePrinterView> {
                       await _getImageFromAsset('assets/images/dash.jpg');
                   await PosTicket.setAlignment(1);
 
-                  await PosTicket.printImage(byte);
-                  await PosTicket.printLine(2);
+                  await PosTicket.printImage(byte, PosAlignment.ALIGN_CENTER);
+                  await PosTicket.feedPaper();
+                  await PosTicket.cutPaper();
                 },
                 child: Text("In ảnh"),
               ),

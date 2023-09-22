@@ -93,9 +93,10 @@ class PosTicket {
     return await platform.invokeMethod("PRINTER_VERSION");
   }
 
-  static Future<void> printImage(Uint8List img) async {
+  static Future<void> printImage(Uint8List img, int alignment) async {
     Map<String, dynamic> arguments = <String, dynamic>{};
     arguments.putIfAbsent("bitmap", () => img);
+    arguments.addAll({"alignment": alignment});
     await platform.invokeMethod("PRINT_IMAGE", arguments);
   }
 
