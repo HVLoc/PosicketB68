@@ -112,7 +112,7 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
                 break;
             case "PRINT_IMAGE":
                 byte[] bytes = call.argument("bitmap");
-                Layout.Alignment alignment = call.argument("alignment");
+                Layout.Alignment alignment = posB68Helper.convertAli(call.argument("alignment"));
                 Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                 posB68Helper.printBitmap(bitmap, alignment);
                 result.success(true);
