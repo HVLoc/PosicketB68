@@ -74,9 +74,9 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
                 result.success(true);
                 break;
             case "INIT_PRINTER":
-            posB68Helper.initSdk();
-            result.success(true);
-            break;
+                boolean connected = posB68Helper.initSdk();
+                result.success(connected);
+                break;
             // case "ENTER_PRINTER_BUFFER":
             // Boolean clearEnter = call.argument("clearEnter");
             // posB68Helper.exitPrinterBuffer(clearEnter);
@@ -134,10 +134,10 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
             // result.success(true);
             // break;
 
-             case "PRINTER_VERSION":
-             String version = posB68Helper.getPrinterPaper();
-             result.success(version);
-             break;
+            case "PRINTER_VERSION":
+                String version = posB68Helper.getPrinterPaper();
+                result.success(version);
+                break;
             // case "PRINTER_SERIALNO":
             // String serialNo = posB68Helper.getPrinterSerialNo();
             // result.success(serialNo);
@@ -181,7 +181,7 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
             // result.success(true);
             // break;
             case "PRINT_STATUS":
-             String status = posB68Helper.showPrinterStatus();
+                String status = posB68Helper.showPrinterStatus();
                 result.success(status);
                 break;
             case "OPEN_CASH_BOX":

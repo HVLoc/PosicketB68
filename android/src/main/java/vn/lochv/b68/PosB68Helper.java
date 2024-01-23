@@ -47,7 +47,7 @@ public class PosB68Helper {
     /**
      * init print service
      */
-    public void initSdk() {
+    public boolean initSdk() {
         mDriverManager = DriverManager.getInstance();
         mPrinter = mDriverManager.getPrinter();
         mSys = mDriverManager.getBaseSysDevice();
@@ -62,8 +62,9 @@ public class PosB68Helper {
         }
         status = mSys.sdkInit();
         if (status != SdkResult.SDK_OK) {
-            // init failed.
+            return false;
         }
+        return true;
     }
 
     /**
@@ -96,18 +97,18 @@ public class PosB68Helper {
     /**
      * Get printer serial number
      */
-//    public String getPrinterSerialNo(){
-//        if(mPrinter == null){
-//            //TODO Service disconnection processing
-//            return "";
-//        }
-//        try {
-//            return mPrinter.getPrinterStatus();
-//        } catch (RemoteException e) {
-//            handleRemoteException(e);
-//            return "";
-//        }
-//    }
+    // public String getPrinterSerialNo(){
+    // if(mPrinter == null){
+    // //TODO Service disconnection processing
+    // return "";
+    // }
+    // try {
+    // return mPrinter.getPrinterStatus();
+    // } catch (RemoteException e) {
+    // handleRemoteException(e);
+    // return "";
+    // }
+    // }
     public void printLine(int line) {
         if (mPrinter == null) {
             // TODO Service disconnection processing
@@ -128,7 +129,6 @@ public class PosB68Helper {
         return mPrinter.is80MMPrinter() ? "80mm" : "58mm";
     }
 
-
     /**
      * Set printer alignment
      */
@@ -145,7 +145,6 @@ public class PosB68Helper {
         formatPos.setFont(font);
     }
 
-
     public void printText(String content, PrnStrFormat format) {
         if (mPrinter == null) {
             // TODO Service disconnection processing
@@ -155,7 +154,6 @@ public class PosB68Helper {
         mPrinter.setPrintAppendString(content, formatResult);
         mPrinter.setPrintStart();
     }
-
 
     /**
      * print Qr Code
@@ -168,28 +166,29 @@ public class PosB68Helper {
 
         int printStatus = mPrinter.getPrinterStatus();
         if (printStatus != SdkResult.SDK_PRN_STATUS_PAPEROUT) {
-            mPrinter.setPrintAppendQRCode(data, width, height, alignment != null ? alignment : Layout.Alignment.ALIGN_CENTER);
+            mPrinter.setPrintAppendQRCode(data, width, height,
+                    alignment != null ? alignment : Layout.Alignment.ALIGN_CENTER);
             printStatus = mPrinter.setPrintStart();
         }
     }
 
-//    /**
-//     * Print a row of a table
-//     */
-//    public void printTable(String[] txts, int[] width, int[] align, int size) {
-//        if (mPrinter == null) {
-//            // TODO Service disconnection processing
-//            return;
-//        }
-//
-//        try {
-//            mPrinter.setFontName("OpenSans-Bold.ttf", null);
-//            mPrinter.setFontSize(size, null);
-//            mPrinter.printColumnsString(txts, width, align, null);
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    // /**
+    // * Print a row of a table
+    // */
+    // public void printTable(String[] txts, int[] width, int[] align, int size) {
+    // if (mPrinter == null) {
+    // // TODO Service disconnection processing
+    // return;
+    // }
+    //
+    // try {
+    // mPrinter.setFontName("OpenSans-Bold.ttf", null);
+    // mPrinter.setFontSize(size, null);
+    // mPrinter.printColumnsString(txts, width, align, null);
+    // } catch (RemoteException e) {
+    // e.printStackTrace();
+    // }
+    // }
 
     /**
      * Print pictures and text in the specified orde
@@ -213,35 +212,35 @@ public class PosB68Helper {
 
     }
 
-//    /**
-//     * Gets whether the current printer is in black mark mode
-//     */
-//    public boolean isBlackLabelMode() {
-//        if (mPrinter == null) {
-//            // TODO Service disconnection processing
-//            return false;
-//        }
-//        try {
-//            return mPrinter.getPrinterMode() == 1;
-//        } catch (RemoteException e) {
-//            return false;
-//        }
-//    }
+    // /**
+    // * Gets whether the current printer is in black mark mode
+    // */
+    // public boolean isBlackLabelMode() {
+    // if (mPrinter == null) {
+    // // TODO Service disconnection processing
+    // return false;
+    // }
+    // try {
+    // return mPrinter.getPrinterMode() == 1;
+    // } catch (RemoteException e) {
+    // return false;
+    // }
+    // }
 
-//    /**
-//     * Gets whether the current printer is in label-printing mode
-//     */
-//    public boolean isLabelMode() {
-//        if (mPrinter == null) {
-//            // TODO Service disconnection processing
-//            return false;
-//        }
-//        try {
-//            return mPrinter.getPrinterMode() == 2;
-//        } catch (RemoteException e) {
-//            return false;
-//        }
-//    }
+    // /**
+    // * Gets whether the current printer is in label-printing mode
+    // */
+    // public boolean isLabelMode() {
+    // if (mPrinter == null) {
+    // // TODO Service disconnection processing
+    // return false;
+    // }
+    // try {
+    // return mPrinter.getPrinterMode() == 2;
+    // } catch (RemoteException e) {
+    // return false;
+    // }
+    // }
 
     /**
      * Transaction printing:
@@ -250,24 +249,24 @@ public class PosB68Helper {
      * result)->exit(don't care
      * result)
      */
-//    public void printTrans(InnerResultCallback callbcak) {
-//        if (mPrinter == null) {
-//            // TODO Service disconnection processing
-//            return;
-//        }
-//
-//        try {
-//            mPrinter.enterPrinterBuffer(true);
-//            printExample();
-//            mPrinter.exitPrinterBufferWithCallback(true, callbcak);
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    // public void printTrans(InnerResultCallback callbcak) {
+    // if (mPrinter == null) {
+    // // TODO Service disconnection processing
+    // return;
+    // }
+    //
+    // try {
+    // mPrinter.enterPrinterBuffer(true);
+    // printExample();
+    // mPrinter.exitPrinterBufferWithCallback(true, callbcak);
+    // } catch (RemoteException e) {
+    // e.printStackTrace();
+    // }
+    // }
 
     /**
      * Open cash box
-     * This method can be used on  devices with a cash drawer interface
+     * This method can be used on devices with a cash drawer interface
      * If there is no cash box (such as V1、P1) or the call fails, an exception will
      * be thrown
      * <p>
@@ -291,88 +290,88 @@ public class PosB68Helper {
      *             3 —— Extinguish screen
      *             4 —— Clear screen contents
      */
-//    public void controlLcd(int flag) {
-//        if (mPrinter == null) {
-//            // TODO Service disconnection processing
-//            return;
-//        }
-//
-//        try {
-//            mPrinter.sendLCDCommand(flag);
-//        } catch (RemoteException e) {
-//            handleRemoteException(e);
-//        }
-//    }
+    // public void controlLcd(int flag) {
+    // if (mPrinter == null) {
+    // // TODO Service disconnection processing
+    // return;
+    // }
+    //
+    // try {
+    // mPrinter.sendLCDCommand(flag);
+    // } catch (RemoteException e) {
+    // handleRemoteException(e);
+    // }
+    // }
 
     /**
      * Display text ,font size is 16 and format is fill
      * sendLCDFillString(txt, size, fill, callback)
      * Since the screen pixel height is 40, the font should not exceed 40
      */
-//    public void sendTextToLcd() {
-//        if (mPrinter == null) {
-//            // TODO Service disconnection processing
-//            return;
-//        }
-//
-//        try {
-//            mPrinter.sendLCDFillString("", 16, true, new InnerLcdCallback() {
-//                @Override
-//                public void onRunResult(boolean show) throws RemoteException {
-//                    // TODO handle result
-//                }
-//            });
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
+    // public void sendTextToLcd() {
+    // if (mPrinter == null) {
+    // // TODO Service disconnection processing
+    // return;
+    // }
+    //
+    // try {
+    // mPrinter.sendLCDFillString("", 16, true, new InnerLcdCallback() {
+    // @Override
+    // public void onRunResult(boolean show) throws RemoteException {
+    // // TODO handle result
+    // }
+    // });
+    // } catch (RemoteException e) {
+    // e.printStackTrace();
+    // }
+    //
+    // }
 
     /**
      * Display two lines and one empty line in the middle
      */
-//    public void sendTextsToLcd() {
-//        if (mPrinter == null) {
-//            // TODO Service disconnection processing
-//            return;
-//        }
-//
-//        try {
-//            String[] texts = {"", null, ""};
-//            int[] align = {2, 1, 2};
-//            mPrinter.sendLCDMultiString(texts, align, new InnerLcdCallback() {
-//                @Override
-//                public void onRunResult(boolean show) throws RemoteException {
-//                    // TODO handle result
-//                }
-//            });
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
+    // public void sendTextsToLcd() {
+    // if (mPrinter == null) {
+    // // TODO Service disconnection processing
+    // return;
+    // }
+    //
+    // try {
+    // String[] texts = {"", null, ""};
+    // int[] align = {2, 1, 2};
+    // mPrinter.sendLCDMultiString(texts, align, new InnerLcdCallback() {
+    // @Override
+    // public void onRunResult(boolean show) throws RemoteException {
+    // // TODO handle result
+    // }
+    // });
+    // } catch (RemoteException e) {
+    // e.printStackTrace();
+    // }
+    //
+    // }
 
     /**
      * Display one 128x40 pixels and opaque picture
      */
-//    public void sendPicToLcd(Bitmap pic) {
-//        if (mPrinter == null) {
-//            // TODO Service disconnection processing
-//            return;
-//        }
-//
-//        try {
-//            mPrinter.sendLCDBitmap(pic, new InnerLcdCallback() {
-//                @Override
-//                public void onRunResult(boolean show) throws RemoteException {
-//                    // TODO handle result
-//                }
-//            });
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
+    // public void sendPicToLcd(Bitmap pic) {
+    // if (mPrinter == null) {
+    // // TODO Service disconnection processing
+    // return;
+    // }
+    //
+    // try {
+    // mPrinter.sendLCDBitmap(pic, new InnerLcdCallback() {
+    // @Override
+    // public void onRunResult(boolean show) throws RemoteException {
+    // // TODO handle result
+    // }
+    // });
+    // } catch (RemoteException e) {
+    // e.printStackTrace();
+    // }
+    //
+    // }
 
     /**
      * Sample print receipt
@@ -380,15 +379,16 @@ public class PosB68Helper {
     public void printExample() {
         int printStatus = mPrinter.getPrinterStatus();
         if (printStatus == SdkResult.SDK_PRN_STATUS_PAPEROUT) {
-            //out of paper
+            // out of paper
             Log.d(TAG, "Out of paper");
         } else {
             PrnStrFormat format = new PrnStrFormat();
             format.setTextSize(30);
             format.setAli(Layout.Alignment.ALIGN_CENTER);
             format.setStyle(PrnTextStyle.BOLD);
-            //format.setFont(PrnTextFont.CUSTOM);
-            //format.setPath(Environment.getExternalStorageDirectory() + "/fonts/simsun.ttf");
+            // format.setFont(PrnTextFont.CUSTOM);
+            // format.setPath(Environment.getExternalStorageDirectory() +
+            // "/fonts/simsun.ttf");
             format.setFont(PrnTextFont.SANS_SERIF);
             mPrinter.setPrintAppendString("Phần mềm in vé", format);
             format.setTextSize(25);
@@ -494,21 +494,21 @@ public class PosB68Helper {
      * 演示打印多张标签
      * 打印多张标签后根据需求选择是否推出标签纸到纸舱口
      */
-//    public void printMultiLabel(int num) {
-//        if (mPrinter == null) {
-//            // TODO Service disconnection processing
-//            return;
-//        }
-//        try {
-//            for (int i = 0; i < num; i++) {
-//                mPrinter.labelLocate();
-//                printLabelContent();
-//            }
-//            mPrinter.labelOutput();
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    // public void printMultiLabel(int num) {
+    // if (mPrinter == null) {
+    // // TODO Service disconnection processing
+    // return;
+    // }
+    // try {
+    // for (int i = 0; i < num; i++) {
+    // mPrinter.labelLocate();
+    // printLabelContent();
+    // }
+    // mPrinter.labelOutput();
+    // } catch (RemoteException e) {
+    // e.printStackTrace();
+    // }
+    // }
 
     /**
      * Custom label ticket content
@@ -518,17 +518,17 @@ public class PosB68Helper {
      * 自定义的标签小票内容
      * 例子中并不能适用所有标签纸，实际使用时注意要自适配标签纸大小，可通过调节字体大小，内容位置等方式
      */
-//    private void printLabelContent() throws RemoteException {
-//        mPrinter.setPrinterStyle(WoyouConsts.ENABLE_BOLD, WoyouConsts.ENABLE);
-//        mPrinter.lineWrap(1, null);
-//        mPrinter.setAlignment(0, null);
-//        mPrinter.printText("商品         豆浆\n", null);
-//        mPrinter.printText("到期时间         12-13  14时\n", null);
-//        mPrinter.printBarCode("{C1234567890123456", 8, 90, 2, 2, null);
-//        mPrinter.lineWrap(1, null);
-//    }
+    // private void printLabelContent() throws RemoteException {
+    // mPrinter.setPrinterStyle(WoyouConsts.ENABLE_BOLD, WoyouConsts.ENABLE);
+    // mPrinter.lineWrap(1, null);
+    // mPrinter.setAlignment(0, null);
+    // mPrinter.printText("商品 豆浆\n", null);
+    // mPrinter.printText("到期时间 12-13 14时\n", null);
+    // mPrinter.printBarCode("{C1234567890123456", 8, 90, 2, 2, null);
+    // mPrinter.lineWrap(1, null);
+    // }
 
-    //Convert Format
+    // Convert Format
     public Alignment convertAli(int alignment) {
         switch (alignment) {
             case 1:

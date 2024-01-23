@@ -30,7 +30,7 @@ class _HomePrinterViewState extends State<HomePrinterView> {
     // Lỗi khi kp thiết bị b58 thì crash app
     if (Platform.isAndroid) {
       try {
-        PosTicket.bindPrinterService().then((value) {
+        PosTicket.initPrinter().then((value) {
           print(value);
           canPrint = true;
         });
