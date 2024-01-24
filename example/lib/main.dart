@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:pos_ticket_b68/pos_ticket_b68.dart.dart';
+import 'package:pos_ticket_b68/pos_ticket_b68.dart';
 
 bool canPrint = false;
 
