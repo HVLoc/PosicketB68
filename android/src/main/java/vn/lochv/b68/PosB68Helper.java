@@ -47,7 +47,7 @@ public class PosB68Helper {
     /**
      * init print service
      */
-    public void initSdk() {
+    public boolea initSdk() {
         mDriverManager = DriverManager.getInstance();
         mPrinter = mDriverManager.getPrinter();
         mSys = mDriverManager.getBaseSysDevice();
@@ -62,8 +62,9 @@ public class PosB68Helper {
         }
         status = mSys.sdkInit();
         if (status != SdkResult.SDK_OK) {
-            // init failed.
+            return false;
         }
+        return true;
     }
 
     /**

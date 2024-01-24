@@ -74,8 +74,8 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
                 result.success(true);
                 break;
             case "INIT_PRINTER":
-            posB68Helper.initSdk();
-            result.success(true);
+            boolean connected = posB68Helper.initSdk();
+            result.success(connected);
             break;
             // case "ENTER_PRINTER_BUFFER":
             // Boolean clearEnter = call.argument("clearEnter");
