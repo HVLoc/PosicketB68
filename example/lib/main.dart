@@ -27,12 +27,12 @@ class _HomePrinterViewState extends State<HomePrinterView> {
   @override
   void initState() {
     //Check có phải b68 không?
-    // Lỗi khi kp thiết bị b58 thì crash app
+    // Lỗi khi kp thiết bị b68 thì crash app
     if (Platform.isAndroid) {
       try {
         PosTicket.bindPrinterService().then((value) {
           print(value);
-          canPrint = true;
+          canPrint = value ?? false;
         });
       } catch (e) {
         canPrint = false;
@@ -54,7 +54,7 @@ class _HomePrinterViewState extends State<HomePrinterView> {
               child: ElevatedButton(
                 onPressed: () async {
                   await PosTicket.initPrinter();
-
+                  await PosTicket.printLine(3);
                   await PosTicket.printText(
                     text: AppConst.nameCompany,
                     posFormatText: PosFormatText(

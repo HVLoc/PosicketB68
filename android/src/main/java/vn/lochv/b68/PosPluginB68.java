@@ -128,11 +128,11 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
                 posB68Helper.setAlign(align);
                 result.success(true);
                 break;
-            // case "LINE_WRAP":
-            // int lines = call.argument("lines");
-            // posB68Helper.printLine(lines);
-            // result.success(true);
-            // break;
+            case "LINE_WRAP":
+                int lines = call.argument("lines");
+                posB68Helper.printLine(lines);
+                result.success(true);
+            break;
 
              case "PRINTER_VERSION":
              String version = posB68Helper.getPrinterPaper();
