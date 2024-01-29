@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:pos_ticket_b68/pos_ticket_b68.dart.dart';
+import 'package:pos_ticket_b68/pos_ticket_b68.dart';
 
 class PosTicket {
   static const platform = MethodChannel('posTicketB68/method_channel');
