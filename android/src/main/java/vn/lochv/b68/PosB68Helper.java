@@ -2,6 +2,7 @@ package vn.lochv.b68;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.RemoteException;
 import android.text.Layout;
 import android.text.Layout.Alignment;
@@ -15,6 +16,8 @@ import com.zcs.sdk.Sys;
 import com.zcs.sdk.print.PrnStrFormat;
 import com.zcs.sdk.print.PrnTextFont;
 import com.zcs.sdk.print.PrnTextStyle;
+
+import java.util.ArrayList;
 
 /**
  * <pre>
@@ -48,23 +51,30 @@ public class PosB68Helper {
      * init print service
      */
     public boolean initSdk() {
-        mDriverManager = DriverManager.getInstance();
-        mPrinter = mDriverManager.getPrinter();
-        mSys = mDriverManager.getBaseSysDevice();
-        int status = mSys.sdkInit();
-        if (status != SdkResult.SDK_OK) {
-            mSys.sysPowerOn();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        if (!isEmulator()) {
+            mDriverManager = DriverManager.getInstance();
+            mPrinter = mDriverManager.getPrinter();
+            mSys = mDriverManager.getBaseSysDevice();
+            int status = mSys.sdkInit();
+            if (status != SdkResult.SDK_OK) {
+                mSys.sysPowerOn();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+            status = mSys.sdkInit();
+            if (status != SdkResult.SDK_OK) {
+                return false;
+            }
+            return true;
         }
-        status = mSys.sdkInit();
-        if (status != SdkResult.SDK_OK) {
-            return false;
-        }
-        return true;
+        return false;
+    }
+
+    private boolean isEmulator() {
+        return (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic")) || Build.FINGERPRINT.startsWith("generic") || Build.FINGERPRINT.startsWith("unknown") || Build.HARDWARE.contains("goldfish") || Build.HARDWARE.contains("ranchu") || Build.MODEL.contains("google_sdk") || Build.MODEL.contains("Emulator") || Build.MODEL.contains("Android SDK built for x86") || Build.MANUFACTURER.contains("Genymotion") || Build.PRODUCT.contains("sdk_google") || Build.PRODUCT.contains("google_sdk") || Build.PRODUCT.contains("sdk") || Build.PRODUCT.contains("sdk_x86") || Build.PRODUCT.contains("vbox86p") || Build.PRODUCT.contains("emulator") || Build.PRODUCT.contains("simulator");
     }
 
     /**

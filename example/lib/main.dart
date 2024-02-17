@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:intl/intl.dart';
+import 'package:get_radio_version_plugin/get_radio_version_plugin.dart';
 import 'package:pos_ticket_b68/pos_ticket_b68.dart';
 
 bool canPrint = false;
@@ -26,8 +26,7 @@ class HomePrinterView extends StatefulWidget {
 class _HomePrinterViewState extends State<HomePrinterView> {
   @override
   void initState() {
-    //Check có phải b68 không?
-    // Lỗi khi kp thiết bị b68 thì crash app
+    // Check có phải b68 không?
     if (Platform.isAndroid) {
       try {
         PosTicket.initPrinter().then((value) {

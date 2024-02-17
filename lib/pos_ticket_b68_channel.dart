@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:get_radio_version_plugin/get_radio_version_plugin.dart';
 import 'package:pos_ticket_b68/pos_ticket_b68.dart';
 
 class PosTicket {
@@ -12,8 +13,24 @@ class PosTicket {
 
   static Future<bool?> initPrinter() async {
     // start máy in
-    final bool? status = await platform.invokeMethod('INIT_PRINTER');
-    return status;
+    String radioVersion = '';
+    try {
+      radioVersion =
+          await GetRadioVersionPlugin.radioVersion ?? 'Unknown radio version';
+    } on PlatformException {
+      radioVersion = 'Failed to get radio version.';
+      return false;
+    }
+
+    if (!(radioVersion == '1.0.0.0' || radioVersion == '')) {
+      try {
+        final bool? status = await platform.invokeMethod('INIT_PRINTER');
+        return status;
+      } catch (e) {
+        return false;
+      }
+    }
+    return false;
   }
 
   ///*resetFontSize*

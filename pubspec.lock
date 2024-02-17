@@ -67,6 +67,19 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  get_radio_version_plugin:
+    dependency: "direct main"
+    description:
+      name: get_radio_version_plugin
+      sha256: e5c6ff638f479bbc8ea3d01f0cf7ce5443efa18793abd189c9726bd12e59cfc0
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   js:
     dependency: transitive
     description:
