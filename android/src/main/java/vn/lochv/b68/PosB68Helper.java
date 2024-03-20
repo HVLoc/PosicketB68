@@ -150,9 +150,9 @@ public class PosB68Helper {
     /**
      * Set font size
      */
-    public void setFontSize(PrnTextFont font) {
+    public void setFontSize(int font) {
 
-        formatPos.setFont(font);
+        formatPos.setTextSize(font);
     }
 
     public void printText(String content, PrnStrFormat format) {

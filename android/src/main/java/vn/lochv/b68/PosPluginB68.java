@@ -92,7 +92,7 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
             // result.success(true);
             // break;
             case "FONT_SIZE":
-                PrnTextFont fontSize = call.argument("size");
+                int fontSize = call.argument("size");
                 posB68Helper.setFontSize(fontSize);
                 result.success(true);
                 break;

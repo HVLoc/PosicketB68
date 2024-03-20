@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get_radio_version_plugin/get_radio_version_plugin.dart';
 import 'package:pos_ticket_b68/pos_ticket_b68.dart';
 
 bool canPrint = false;
@@ -233,6 +232,8 @@ class _HomePrinterViewState extends State<HomePrinterView> {
                   await PosTicket.setAlignment(1);
 
                   await PosTicket.printImage(byte, PosAlignment.ALIGN_CENTER);
+                  await PosTicket.printLine(3);
+                  await PosTicket.printText(text: ' ');
                   await PosTicket.feedPaper();
                   await PosTicket.cutPaper();
                 },
