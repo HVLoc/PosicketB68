@@ -234,7 +234,6 @@ class _HomePrinterViewState extends State<HomePrinterView> {
                   await PosTicket.printImage(byte, PosAlignment.ALIGN_CENTER);
                   await PosTicket.printLine(3);
                   await PosTicket.printText(text: ' ');
-                  await PosTicket.feedPaper();
                   await PosTicket.cutPaper();
                 },
                 child: Text("In ảnh"),

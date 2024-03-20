@@ -132,7 +132,7 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
                 int lines = call.argument("lines");
                 posB68Helper.printLine(lines);
                 result.success(true);
-            break;
+                break;
 
             case "PRINTER_VERSION":
                 String version = posB68Helper.getPrinterPaper();
@@ -201,10 +201,10 @@ public class PosPluginB68 implements FlutterPlugin, MethodCallHandler {
                 String getPrintPaper = posB68Helper.getPrinterPaper();
                 result.success(getPrintPaper);
                 break;
-            // case "FEED_PAPER":
-            // posB68Helper.feedPaper();
-            // result.success(true);
-            // break;
+//            case "FEED_PAPER":
+//                posB68Helper.feedPaper();
+//                result.success(true);
+//                break;
             // case "BACK_LABEL_MODE":
             // boolean isBackkLabel = posB68Helper.isBlackLabelMode();
             // result.success(isBackkLabel);

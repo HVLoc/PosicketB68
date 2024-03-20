@@ -162,9 +162,9 @@ class PosTicket {
     return await platform.invokeMethod("PRINT_PAPER");
   }
 
-  static Future<void> feedPaper() async {
-    await platform.invokeMethod("FEED_PAPER");
-  }
+  // static Future<void> feedPaper() async {
+  //   await platform.invokeMethod("FEED_PAPER");
+  // }
 
   static Future<bool> getBackLabelMode() async {
     return await platform.invokeMethod("BACK_LABEL_MODE");
