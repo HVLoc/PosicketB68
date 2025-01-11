@@ -23,7 +23,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 32
-    namespace 'vn.lochv.b68'
+    namespace 'com.example.posTicketB68'
     defaultConfig {
         minSdkVersion 21
     }
