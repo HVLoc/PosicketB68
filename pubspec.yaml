@@ -12,7 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.3
-  get_radio_version_plugin: ^1.0.0
+  get_radio_version_plugin:
+    git:
+      url: https://github.com/MinhTung263/get_radio_version_plugin.git
+      ref: main
 
 dev_dependencies:
   flutter_test:
